@@ -1,0 +1,25 @@
+
+<div class="card">
+  <div class="card-header">
+    <h4>{{ incident.title }}</h4>
+    <i *ngIf="authService.isLoggedIn()" class="fa fa-pencil" aria-hidden="true" title="Meldung bearbeiten" (click)="edit(incident._id)"></i>
+  </div>
+  <div class="card-body">
+    <p class="card-subtitle mb-2 text-muted">anonym gemeldet am {{ incident.dateCreated | date:'dd.MM.yyyy' }}, zuletzt bearbeitet am {{ incident.dateUpdated | date:'dd.MM.yyyy' }}</p>
+    <p class="card-text">{{ incident.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngIf="incident.measures !== ''">
+        <h6 class="card-subtitle mb-2">Maßnahmen:</h6>
+        <p class="card-text">{{ incident.measures }}</p>
+    </li>
+    <li class="list-group-item" *ngIf="incident.suggestions !== ''">
+        <h6 class="card-subtitle mb-2">Verbesserungsvorschläge:</h6>
+        <p class="card-text">{{ incident.suggestions }}</p>
+    </li>
+    <li class="list-group-item" *ngIf="incident.answer !== ''">
+        <h6 class="card-subtitle mb-2">Antwort des CIRS-Team:</h6>
+        <p class="card-text">{{ incident.answer }}</p>
+    </li>
+  </ul>
+</div>

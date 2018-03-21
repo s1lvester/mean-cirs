@@ -1,0 +1,116 @@
+
+<h2>Ereignis melden</h2>
+<p>Bitte beschreiben Sie das Ereignis sachlich und verzichten Sie auf die Nennung von Namen 
+  oder anderen persönlichen Merkmalen. Die Medlung erfolgt anonym, das CIRS-Team behält sich 
+  allerdings vor den Text der Meldung vor der Veröffentlichung zu bearbeiten.
+</p>
+
+<form [formGroup]="form" (ngSubmit)="createIncident()">
+  <div class="form-group">
+    <label for="title">Titel der Meldung:</label>
+    <input 
+      formControlName="title"
+      id="title"
+      type="text"
+      class="form-control">
+    <div 
+      class="alert alert-danger"
+      *ngIf="title.touched && title.invalid">
+      <div *ngIf="title.errors.required">Bitte einen Titel angeben!</div>
+      <div *ngIf="title.errors.minlength">Titel zu kurz. Bitte mindestens {{ title.errors.minlength.requiredLength }} Zeichen angeben.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Bitte beschreiben Sie das Ereignis:</label>
+    <textarea
+      formControlName="description"
+      id="description"
+      rows=8
+      cols=30
+      class="form-control">
+    </textarea>
+    <div 
+      class="alert alert-danger"
+      *ngIf="description.touched && description.invalid">
+      <div *ngIf="description.errors.required">Bitte eine Beschreibung angeben!</div>
+      <div *ngIf="description.errors.minlength">Beschreibung zu kurz. Bitte mindestens {{ description.errors.minlength.requiredLength }} Zeichen angeben.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-header">Konnte das Ereignis behoben werden?</p>
+    <div class="btn-group card-body" data-toggle="buttons">
+      <label class="btn btn-secondary" [class.active]="!stateMeasures" (click)="toggleStateMeasures()">
+        <input type="radio" 
+          name="options" 
+          id="false" 
+          autocomplete="off" 
+          [checked]="!stateMeasures" > Nein
+      </label>
+      <label class="btn btn-secondary" [class.active]="stateMeasures" (click)="toggleStateMeasures()">
+        <input type="radio" 
+          name="options" 
+          id="true" 
+          autocomplete="off" 
+          [checked]="stateMeasures"> Ja
+      </label>
+    </div>
+    <div class="form-group card-body" *ngIf="stateMeasures">
+      <label for="measures">Wie wurde das Ereignis behoben?</label>
+      <textarea
+        formControlName="measures"
+        id="measures"
+        rows=4
+        cols=30
+        class="form-control">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-header">Haben Sie Vorschläge wie das Ereignis in Zukunft verhindert werden könnte?</p>
+    <div class="btn-group card-body" data-toggle="buttons">
+      <label class="btn btn-secondary" [class.active]="!stateSuggestions" (click)="toggleStateSuggestions()">
+        <input type="radio" 
+          name="options" 
+          id="false" 
+          autocomplete="off" 
+          [checked]="!stateSuggestions"> Nein
+      </label>
+      <label class="btn btn-secondary" [class.active]="stateSuggestions" (click)="toggleStateSuggestions()">
+        <input type="radio" 
+          name="options" 
+          id="true" 
+          autocomplete="off" 
+          [checked]="stateSuggestions"> Ja
+      </label>
+    </div>
+    <div class="form-group card-body" *ngIf="stateSuggestions">
+      <label for="suggestions">Bitte beschreiben Sie Ihre Vorschläge:</label>
+      <textarea
+        formControlName="suggestions"
+        id="suggestions"
+        rows=4
+        cols=30
+        class="form-control">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="alert" 
+    [class.alert-danger]="error"
+    [class.alert-success]="message"
+    role="alert"
+    *ngIf="error || message"> 
+    {{ error }} {{ message }}
+  </div>
+
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="form.invalid">
+    Meldung absenden
+  </button>
+
+</form>

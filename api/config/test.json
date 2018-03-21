@@ -1,0 +1,6 @@
+
+{
+    "Port": 3001,
+    "DbCollection": "CirsTest",
+    "SECRET_KEY": "supersecretkey"
+}

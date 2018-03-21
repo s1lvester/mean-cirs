@@ -1,0 +1,29 @@
+
+<p>Sie sind angemeldet. <a routerLink="/" (click)="authService.logout()">Jetzt abmelden.</a></p>
+<hr>
+<h2>Unveröffentlichte Meldungen</h2>
+<p>Im Folgenden alle neu eingegangen Meldungen, die noch nicht veröffentlicht wurden. 
+    Bitte sehen Sie die Meldungen durch und entfernen Sie sensible Daten, die Beteiligte
+    Patientinnen und Patienten oder Mitarbeiterinnen und Mitarbeiter identifizieren könnten.
+</p>
+<p *ngIf="incidents.length > 0">
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Suchen...">
+</p>
+<table class="table" *ngIf="incidents.length > 0">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of filteredIncidents">
+            <td>{{ i.dateCreated | date:'dd.MM.yyyy' }}</td>
+            <td>{{ i.title }}</td>
+            <td><a [routerLink]="['/admin/', i._id]">Bearbeiten</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 *ngIf="incidents.length === 0">Aktuell keine Meldungen.</h4>

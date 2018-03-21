@@ -1,0 +1,16 @@
+
+.card {
+    margin-top: 20px;
+}
+
+.admin-card-body {
+    background-color: lightsalmon;
+}
+
+.fa {
+    cursor: pointer;
+}
+
+i {
+    float: right;
+}

@@ -1,0 +1,8 @@
+
+{
+    "Port": 3000,
+    "DbHost": "localhost",
+    "DbPort": 27017,
+    "DbCollection": "Cirs",
+    "SECRET_KEY": "supersecretkey"
+}

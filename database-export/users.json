@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "5a9ec60ae3f910da83a68662" }, "email" : "hello@world.com", "password" : "$2a$10$puoeTCDnYf8anm/KV2NpKeQmHn0jeKWR/yFL61gRbfWrrceEDmlY2" }

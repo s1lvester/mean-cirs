@@ -1,0 +1,62 @@
+
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm">
+      <div class="form-group">
+        <label for="title">Titel:</label>
+        <input #title="ngModel" [(ngModel)]="incident.title" name="title" id="title" class="form-control" type="text" required>
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          Ein Titel muss angegeben werden!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Beschreibung:</label>
+        <textarea #description="ngModel" [(ngModel)]="incident.description" name="description" id="description" rows="5" class="form-control" required> </textarea>
+        <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+          Beschreibung muss angegeben werden!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="measures">Maßnahmen:</label>
+        <textarea #measures="ngModel" [(ngModel)]="incident.measures" name="measures" id="measures" rows="3" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="suggestions">Verbesserungsvorschläge:</label>
+        <textarea #suggestions="ngModel" [(ngModel)]="incident.suggestions" name="suggestions" id="suggestions" rows="3" class="form-control"></textarea>
+      </div>
+      <div class="form-group radio">
+        <h6>Sichtbarkeit der Meldung:</h6>
+        <label class="center-block"><input type="radio" [(ngModel)]="incident.published" name="published" [value]=true> öffentlich</label>
+        <label class="center-block"><input type="radio" [(ngModel)]="incident.published" name="published" [value]=false> nur für Administratoren</label>
+      </div>
+      <div class="form-group">
+        <label for="answer">Antort des CIRS-Team:</label>
+        <textarea #answer="ngModel" [(ngModel)]="incident.answer" name="answer" id="answer" rows="5" class="form-control"></textarea>
+      </div>
+      <div class="form-group radio">
+        <h6>Status der Meldung:</h6>
+        <label class="center-block"><input type="radio" [(ngModel)]="incident.done" name="done" [value]=false> in Bearbeitung</label>
+        <label class="center-block"><input type="radio" [(ngModel)]="incident.done" name="done" [value]=true> abgeschlossen</label>
+      </div>
+      <button class="btn btn-primary" (click)="save(f.value)">Speichern</button>
+      <button class="btn btn-danger" (click)="delete()">Medlung Löschen</button>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Vorschau:</h3>
+    <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">{{ incident.title }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">anonym gemeldet am {{ incident.dateCreated | date:'dd.MM.yyyy' }}</h6>
+          <p class="card-text">{{ incident.description }}</p>
+          <h6 *ngIf="incident.measures !== ''" class="card-subtitle mb-2 text-muted">Maßnahmen:</h6>
+          <p *ngIf="incident.measures !== ''" class="card-text">{{ incident.measures }}</p>
+          <h6 *ngIf="incident.suggestions !== ''" class="card-subtitle mb-2 text-muted">Verbesserungsvorschläge:</h6>
+          <p *ngIf="incident.suggestions !== ''" class="card-text">{{ incident.suggestions }}</p>
+          <h6 *ngIf="incident.answer !== ''" class="card-subtitle mb-2 text-muted">Antwort des CIRS-Team:</h6>
+          <p *ngIf="incident.answer !== ''" class="card-text">{{ incident.answer }}</p>
+      </div>
+    </div>
+  </div>
+</div>

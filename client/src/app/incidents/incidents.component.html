@@ -1,0 +1,27 @@
+
+<div class="nav nav-pills">
+  <a class="nav-link" routerLinkActive="active" routerLink="/incidents" [queryParams]="{ selector: 'process' }">Meldungen in Bearbeitung</a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/incidents" [queryParams]="{ selector: 'done' }">Abgeschlossene Meldungen</a>
+</div>
+
+<p></p>
+
+<p>
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Suchen...">
+</p>
+<table class="table table-responsive-sm">
+    <thead>
+        <tr>
+            <th class="w-25">Datum</th>
+            <th class="w-50">Titel</th>
+            <th class="w-25"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of filteredIncidents">
+            <td><a [routerLink]="['/incident/', i._id]">{{ i.dateCreated | date:'dd.MM.yyyy' }}</a></td> 
+            <td><a [routerLink]="['/incident/', i._id]">{{ i.title }}</a></td>
+            <td><i *ngIf="authService.isLoggedIn()" class="fa fa-pencil" aria-hidden="true" title="Meldung bearbeiten" (click)="edit(i._id)"></i></td>
+        </tr>
+    </tbody>
+</table>
